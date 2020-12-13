@@ -1,0 +1,40 @@
+spring:
+
+  jackson:
+    date-format: yyyy-MM-dd'T'HH:mm:ss
+    default-property-inclusion: non_empty
+    serialization:
+      fail-on-empty-beans: false
+      write-dates-as-timestamps: false
+    deserialization:
+      fail-on-unknown-properties: false
+
+  flyway:
+    enabled: false
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: false
+        show_sql: true
+        globally_quoted_ids: true
+        enable_lazy_load_no_trans: true
+        hbm2ddl:
+          auto: update
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST:127.0.0.1}:${MYSQL_PORT:3306}/${MYSQL_NAME:multitenancy_manager}?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true
+    username: ${MYSQL_USERNAME:root}
+    password: ${MYSQL_PASSWORD:toor}
+
+  rabbitmq:
+    host: ${RABBITMQ_HOST:127.0.0.1}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:root}
+    password: ${RABBITMQ_PASSWORD:toor}
+    virtual-host: ${RABBITMQ_VIRTUAL_HOST:/}
+
+server:
+  port: 9090

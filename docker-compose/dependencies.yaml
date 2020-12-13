@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+
+  mysql:
+    container_name: mysql
+    image: mysql:8
+    ports:
+      - 3306:3306/tcp
+    environment:
+      - MYSQL_ROOT_PASSWORD=toor
+    networks:
+      - multi-tenancy
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3.8.3-management-alpine
+    ports:
+      - 15672:15672/tcp
+      - 5672:5672/tcp
+    environment:
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=toor
+    networks:
+      - multi-tenancy
+
+networks:
+  multi-tenancy:
+    name: multi-tenancy
